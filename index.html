@@ -27,10 +27,10 @@
     </div>
 
     <script>
-        // Detección automática de entorno (Local vs Render)
+        // Detección automática: si estás en tu PC usa localhost, si estás en internet usa Render
         const API_URL = window.location.hostname === 'localhost' 
             ? 'http://localhost:3000' 
-            : 'https://tu-api-nombre.onrender.com'; // ⚠️ Reemplaza con la URL real de tu servicio en Render
+            : 'https://segundoexamen.onrender.com';
 
         async function calcularLeche() {
             const litros = parseFloat(document.getElementById('litros').value);
@@ -61,7 +61,7 @@
                 }
             } catch (error) {
                 console.error('Error de conexión:', error);
-                alert('No se pudo conectar con el servidor.');
+                alert('No se pudo conectar con el servidor. (Nota: Si tu servicio en Render acaba de despertar, espera unos segundos e inténtalo de nuevo).');
             }
         }
     </script>
