@@ -9,7 +9,17 @@ app.use(express.json());
 
 const LITROS_POR_GALON = 3.785;
 
-// Endpoint POST para realizar el cálculo
+// Ruta raíz para evitar el "Not Found" al entrar al sitio en el navegador
+app.get('/', (req, res) => {
+    return res.json({ 
+        estado: 'API de Conversión de Leche funcionando correctamente 🚀',
+        endpointsDisponibles: {
+            calcularLeche: 'POST /api/calcular-leche'
+        }
+    });
+});
+
+// Endpoint POST para realizar el cálculo del examen
 app.post('/api/calcular-leche', (req, res) => {
     try {
         const { L, PG } = req.body;
@@ -36,11 +46,6 @@ app.post('/api/calcular-leche', (req, res) => {
         console.error(err);
         return res.status(500).json({ error: 'Error interno en el servidor' });
     }
-});
-
-// Ruta raíz para verificar que el servicio está activo
-app.get('/', (req, res) => {
-    res.json({ estado: 'API de Conversión de Leche funcionando correctamente 🚀' });
 });
 
 const PORT = process.env.PORT || 3000;
