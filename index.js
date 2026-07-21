@@ -1,15 +1,11 @@
 const express = require('express');
 const cors = require('cors');
-const path = require('path');
 
 const app = express();
 
 // Habilitar CORS y lectura de JSON
 app.use(cors());
 app.use(express.json());
-
-// Servir archivos estáticos (HTML, CSS, JS del frontend) desde la misma carpeta del proyecto
-app.use(express.static(path.join(__dirname)));
 
 const LITROS_POR_GALON = 3.785;
 
@@ -40,6 +36,11 @@ app.post('/api/calcular-leche', (req, res) => {
         console.error(err);
         return res.status(500).json({ error: 'Error interno en el servidor' });
     }
+});
+
+// Ruta raíz para verificar que el servicio está activo
+app.get('/', (req, res) => {
+    res.json({ estado: 'API de Conversión de Leche funcionando correctamente 🚀' });
 });
 
 const PORT = process.env.PORT || 3000;
